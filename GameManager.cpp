@@ -1,8 +1,10 @@
-// Class definition for XO_GameManager class and Pyramic X_O GameManager
-// Author:  Mohammad El-Ramly
-// Date:    10/10/2022
-// Version: 1
-
+// File name: Game manager
+// Purpose: Problem 3
+// Author(s): Yousuf Mounir Ramadan
+// ID(s): 20210489
+// Section: S17 & S18
+// Date:16/12/2023
+// Version: 1.0
 #include <iostream>
 #include"../include/BoardGame_Classes.hpp"
 using namespace std;
@@ -12,13 +14,6 @@ GameManager::GameManager(Board* bPtr, Player* playerPtr[2] ) {
     players[0] = playerPtr[0];
     players[1] = playerPtr[1];
 }
-//-------------------------------------------------------------------------
-GameManager::GameManager(Board* bPtr, PyramicPlayer* playerPtr[2]) {
-    boardPtr = bPtr;
-    players[0] = playerPtr[0];
-    players[1] = playerPtr[1];
-}
-//--------------------------------------------------------------------------
 
 void GameManager::run() {
     int x, y;
@@ -32,14 +27,14 @@ void GameManager::run() {
                 players[i]->get_move(x, y);
             }
             boardPtr->display_board();
-            if (boardPtr->is_winner()){
-                cout  << players[i]->to_string() << " wins\n";
-                return;
-            }
-            if (boardPtr->is_draw()){
-                cout << "Draw!\n";
-                return;
-            }
         }
     }
+    int state = boardPtr->is_winner(players[0]->get_symbol(), players[1]->get_symbol());
+    if (state == 1)
+        cout << players[0]->to_string() << " wins\n";
+    else if (state == -1)
+        cout << players[1]->to_string() << " wins\n";
+    else
+        cout << "Draw!\n";
 }
+
